@@ -4,11 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+
 /// <summary>
 /// The CardDisplay once, when instaniated,
 /// calls the values of the Card scriptable object and transfers the data onto itself.
-/// 
+/// This is neccecary because changes of the scriptable object during runtime are saved onto it. 
+/// So the CardDisplay is responsible for showing the cards specifications 
+/// meaning that if these change due to other cards effects they are changed here. 
 /// </summary>
+/// 
 public class CardDisplay : MonoBehaviour
 {
     public Card card;
@@ -25,19 +29,36 @@ public class CardDisplay : MonoBehaviour
     private GameObject deadPile;
 
     public TextMeshProUGUI costText, nameText, sTRText, dEFText, traitsText, descriptionText;
-    
+
     public Image cardArtwork;
+ 
+    public int cardID;
+    public int cardCost;
+    public int cardSTR;
+    public int cardDEF;
+    public string cardName;
+    public bool Human;
+    public bool Devout;
+
 
     // Start is called before the first frame update
     void Start()
-    {
+    {       
+        // set values according to card
+        cardID = card.cardID;
+        cardCost = card.cardCost;
+        cardSTR = card.cardSTR;
+        cardDEF = card.cardDEF;
+        cardName = card.cardName;
+        Human = card.Human;
+        Devout = card.Devout;
+
         cardBehaviour = gameObject.GetComponent<CardBehaviour>();
         SetCardValues();
         FindPlayAreas();
-        
-        
-       
-    }
+
+
+}
 
     void Update()
     {
@@ -54,9 +75,9 @@ public class CardDisplay : MonoBehaviour
     }
     void SetCardValues()
     {
-        costText.text = card.cardCost.ToString(); 
-        sTRText.text = card.cardSTR.ToString();
-        dEFText.text = card.cardDEF.ToString();
+        costText.text = cardCost.ToString(); 
+        sTRText.text = cardSTR.ToString();
+        dEFText.text = cardDEF.ToString();
 
         nameText.text = card.cardName;
         descriptionText.text = card.cardDescription;

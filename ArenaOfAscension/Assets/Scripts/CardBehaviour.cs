@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 {
@@ -11,6 +12,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Arena          arena;
     [SerializeField] private CardDisplay    cardDisplay;
 
+    public event Action onCardIsPlayedFromHand;
 
     public GameObject currentTile;
     public Image artwork;
@@ -28,6 +30,10 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
     }
 
+    void Start()
+    {
+        //EventManager.onCardIsPlayedFromHand += 
+    }
 
     // Update is called once per frame
     void Update()
@@ -35,6 +41,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
         Playable();
         cardDisplay.CheckCardState();
     }
+
 
     //Check if card is hovered
     public void OnMouseOver()

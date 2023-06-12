@@ -14,16 +14,14 @@ public class Norse_Priest : MonoBehaviour
     {
         cardDisplay = gameObject.GetComponent<CardDisplay>();
         cardBehaviour = gameObject.GetComponent<CardBehaviour>();
+
+
+
+        EventManager.onCardIsPlayedFromHand += IncreaseDevoutSTR;
+    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (this.cardDisplay.card.cardState == Card.CardState.inArena)
-        {
-            IncreaseDevoutSTR();
-        }
-    }
+
 
     public void IncreaseDevoutSTR()
     {
@@ -31,15 +29,20 @@ public class Norse_Priest : MonoBehaviour
 
         foreach ( GameObject unit  in unitsInArena)
         {
-            if (unit.GetComponent<CardDisplay>().card.Devout == true)
+            if (unit.GetComponent<CardDisplay>().Devout == true)
             {
                 for (int i = 0; i < 1; i++)
                 {
-                    unit.GetComponent<CardDisplay>().card.cardSTR = unit.GetComponent<CardDisplay>().card.cardSTR + 1;
-                    Debug.Log(unit.name + unit.GetComponent<CardDisplay>().card.cardSTR);
+                    unit.GetComponent<CardDisplay>().cardSTR = unit.GetComponent<CardDisplay>().cardSTR + 1;
+                    Debug.Log(unit.name + unit.GetComponent<CardDisplay>().cardSTR);
                 } 
 
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        EventManager.onCardIsPlayedFromHand -= IncreaseDevoutSTR;
     }
 }
