@@ -26,7 +26,8 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         arena = this.GetComponentInParent<Arena>();
     }
 
-    
+    #region Event Functions
+   
     public void OnPointerEnter(PointerEventData eventData)
     {        
        // image.color = Color.green;
@@ -46,6 +47,20 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
             d.parentToReturn = this.transform;
         }
     }
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        List<GameObject> neighbours = GetNeighboringTiles(arenaPos);
+        foreach (GameObject tile in neighbours)
+        {
+            if (IsNeighboursChildSelected(tile) == true && occupiedByFriend == false || IsNeighboursChildSelected(tile) == true && occupiedByFoe == true)
+            {
+                tile.GetComponentInChildren<CardBehaviour>().MoveSelectedCardToEligableNeighbour(gameObject);
+            }
+        }
+    }
+    #endregion
+    #region Position Functions
     public List<GameObject> GetNeighboringTiles(Vector2Int position)
     {
         List<GameObject> neighbors = new List<GameObject>();
@@ -75,6 +90,7 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
 
         return neighbors;
     }
+    
 
     public GameObject GetTile(Vector2Int pos)
     {
@@ -88,20 +104,6 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
             return null;
         }
     }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        List<GameObject> neighbours = GetNeighboringTiles(arenaPos);
-        foreach (GameObject tile in neighbours)
-        {
-            if (IsNeighboursChildSelected(tile) == true && occupiedByFriend==false|| IsNeighboursChildSelected(tile) == true && occupiedByFoe == true)
-            {
-                tile.GetComponentInChildren<CardBehaviour>().MoveSelectedCardToEligableNeighbour(gameObject);
-            } 
-        }
-    }
-
-
 
     public bool IsNeighboursChildSelected(GameObject neighbour)
     {
@@ -117,4 +119,6 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
             else return false;
         
     }
+
+    #endregion
 }

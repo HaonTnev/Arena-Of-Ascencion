@@ -93,7 +93,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1147366786942442027, guid: af3df67eb1965b04799fdce777177d54, type: 3}
       propertyPath: m_Name
-      value: BaseCard
+      value: Berserker
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8205800047461618875, guid: af3df67eb1965b04799fdce777177d54, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1386921672126525888, guid: af3df67eb1965b04799fdce777177d54, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af3df67eb1965b04799fdce777177d54, type: 3}

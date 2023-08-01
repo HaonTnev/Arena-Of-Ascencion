@@ -56,13 +56,14 @@ public class CardDisplay : MonoBehaviour
         cardBehaviour = gameObject.GetComponent<CardBehaviour>();
         SetCardValues();
         FindPlayAreas();
+        card.cardState = Card.CardState.inDeck;
 
-
-}
+    }
 
     void Update()
     {
         ResetSelection();
+       // SetCardValues();
         
     }
 
@@ -73,20 +74,25 @@ public class CardDisplay : MonoBehaviour
         deckArea =  GameObject.Find("Deck");
         arena =     GameObject.Find("Arena");
     }
-    void SetCardValues()
+
+    //Should be called from whereever changes to card values are made, so the UI updates.
+    public void SetCardValues()
     {
         costText.text = cardCost.ToString(); 
         sTRText.text = cardSTR.ToString();
+        SetSTRTextColor();
         dEFText.text = cardDEF.ToString();
+        SetDEFTextColor();
 
         nameText.text = card.cardName;
         descriptionText.text = card.cardDescription;
 
         cardArtwork.sprite = card.Artwork;
-        card.cardState = Card.CardState.inDeck;
-       // Debug.Log(gameObject.name + ": state " + card.cardState);
+
     }
 
+
+    // Tbh I have no Idea what this does anymore :,)
     public void CheckCardState()
     {
 
@@ -125,9 +131,11 @@ public class CardDisplay : MonoBehaviour
 
     }
 
+
+
     public void HighlightCard()
     {
-        cardArtwork.color = Color.blue;
+        cardArtwork.color = Color.gray;
     }
     public void ResetHighlightCard()
     {
@@ -139,6 +147,7 @@ public class CardDisplay : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        
         if (card.cardState == Card.CardState.inDeck)
         {
            // DrawCard();
@@ -149,6 +158,7 @@ public class CardDisplay : MonoBehaviour
 
         }
     }
+
     void DiscardCard()
     {
             gameObject.transform.SetParent(deadPile.transform, false);
@@ -158,11 +168,43 @@ public class CardDisplay : MonoBehaviour
 
     public void ResetSelection()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
         {
             card.selection = Card.Selection.notSelected;
+            ResetHighlightCard();
             Debug.Log("Selection reset");
         }
     }
 
+
+    private void SetSTRTextColor()
+    {
+        if (cardSTR > card.cardSTR)
+        {
+            sTRText.color = Color.green;
+        }
+        else if (cardSTR < card.cardSTR)
+        {
+            sTRText.color = Color.red;
+        }
+        else
+        {
+            sTRText.color = Color.white;
+        }
+    }
+    private void SetDEFTextColor()
+    {
+        if (cardDEF > card.cardDEF)
+        {
+            dEFText.color = Color.green;
+        }
+        else if (cardDEF < card.cardDEF)
+        {
+            dEFText.color = Color.red;
+        }
+        else
+        {
+            dEFText.color = Color.white;
+        }
+    }
 }

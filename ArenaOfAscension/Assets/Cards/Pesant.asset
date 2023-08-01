@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bd5426bf9694b4e8d44ef4c1243fce, type: 3}
   m_Name: Pesant
   m_EditorClassIdentifier: 
-  cardState: 0
+  cardState: 3
   selection: 1
   cardID: 0
   cardCost: 0

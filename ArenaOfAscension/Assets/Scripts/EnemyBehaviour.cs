@@ -134,6 +134,13 @@ public class EnemyBehaviour : MonoBehaviour
         toKill.transform.SetParent(deadPile.transform, false);
         toKill.GetComponent<CardDisplay>().card.cardState = Card.CardState.inDeadPile;
         gameManager.currentPlayerHealth = gameManager.currentPlayerHealth - toKill.GetComponent<CardDisplay>().card.cardSTR;
+
+        // Same reasoning as is CardBehaviour ln 101-105.
+        if (toKill.GetComponent<CardDisplay>().cardID == 6)
+        {
+            toKill.GetComponent<Norse_Priest>().DecreaseDevoutSTR();
+        }
+        
     }
 
     public int TakeDamage(int health, int cardDMG)

@@ -47,5 +47,11 @@ public class Card : ScriptableObject
 
     //Not sure how the unique card abilities will be implemented. remains to be seen
 
+    public void CheckSelection()
+    {
+        if (selection == Selection.selected)
+        {
 
+        }
+    }
 }

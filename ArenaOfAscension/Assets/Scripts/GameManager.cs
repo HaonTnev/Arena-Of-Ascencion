@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public Turn turn;
 
+    public bool cardSelected = false;
     public enum Turn
     {
         playerTurn, 
@@ -128,6 +129,12 @@ public class GameManager : MonoBehaviour
     {
        // Debug.Log("Enemy turn starts.");
         enemyBehaviour.EnemyMove();
+
+        GameObject[] cards = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject card in cards)
+        {
+            card.GetComponent<CardBehaviour>().wasUsedThisTurn = false;
+        }
 
         //Debug.Log("Enemy turn ends.");
         StartPlayerTurn();

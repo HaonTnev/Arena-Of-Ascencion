@@ -18,6 +18,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     public Image artwork;
 
     public bool isHovered = false;
+    public bool wasUsedThisTurn = false;
 
     //Set refrences to GameObjects and scripts that cannot be set in the inspector
     private void Awake()
@@ -91,8 +92,27 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
         card.cardState = Card.CardState.inArena;
         GetTilePosition(currentTile);
         artwork.transform.localPosition = new Vector3(0,0,0);
+
+
+        Trytogetthepriestscriptanduseit();
+
+    }
+
+    // A very unelegant way to recieve card specific functionalitiy.
+    // Cause in theory we would have to check each Card ID every time we play a card.
+    // For now we can implement like this, in order to continue towards the playable prototype.
+    // But I cant help but think that we should store an array of all the "battlecries" and just get the one at the ID of the card. 
+    // But how and where? 
+
+    public void Trytogetthepriestscriptanduseit()
+    {
+        GameObject temp = gameObject;
         
-        
+        if (temp.GetComponent<Norse_Priest>()!= null&& this.card.cardID== 6)
+        {
+            temp.GetComponent<Norse_Priest>().IncreaseDevoutSTR();
+        }
+
     }
 
     //Get position of the card in the arena by feeding in parent tile go.
@@ -154,20 +174,26 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     public void MoveSelectedCardToEligableNeighbour(GameObject eligableNeighbour)
     {
         GameObject cameFrom = currentTile;
-        if (eligableNeighbour.GetComponent<ArenaTile>().occupiedByFriend == false && eligableNeighbour.GetComponent<ArenaTile>().occupiedByFoe == false)
+        if (wasUsedThisTurn==false)
         {
-            gameObject.transform.SetParent(eligableNeighbour.transform, false);
-            eligableNeighbour.GetComponent<ArenaTile>().occupiedByFriend = true;
-            eligableNeighbour.GetComponent<BoxCollider2D>().enabled = false;
-            cameFrom.GetComponent<ArenaTile>().occupiedByFriend = false;
-            cameFrom.GetComponent<BoxCollider2D>().enabled = true;
-            currentTile = eligableNeighbour;
-            card.selection = Card.Selection.notSelected;
+            if (eligableNeighbour.GetComponent<ArenaTile>().occupiedByFriend == false && eligableNeighbour.GetComponent<ArenaTile>().occupiedByFoe == false)
+            {
+                gameObject.transform.SetParent(eligableNeighbour.transform, false);
+                eligableNeighbour.GetComponent<ArenaTile>().occupiedByFriend = true;
+                eligableNeighbour.GetComponent<BoxCollider2D>().enabled = false;
+                cameFrom.GetComponent<ArenaTile>().occupiedByFriend = false;
+                cameFrom.GetComponent<BoxCollider2D>().enabled = true;
+                currentTile = eligableNeighbour;
+                card.selection = Card.Selection.notSelected;
+            }
+            if (eligableNeighbour.GetComponent<ArenaTile>().occupiedByFoe == true)
+            {
+                CardDoDamage(eligableNeighbour);
+            }
+
+            wasUsedThisTurn = true;
         }
-        if (eligableNeighbour.GetComponent<ArenaTile>().occupiedByFoe == true)
-        {
-            CardDoDamage(eligableNeighbour);
-        }
+
 
     }
     public void CardDoDamage(GameObject occupiedTile)
@@ -191,6 +217,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
                 TakeDamage(occupiedTile.GetComponentInChildren<EnemyBehaviour>().currentHealth, card.cardSTR);
 
         }
+        card.selection = Card.Selection.notSelected;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
