@@ -147,4 +147,9 @@ public class GameManager : MonoBehaviour
         currentMana = maxMana;
 
     }
+
+    public void DRAWFUNCTION(int drawamount)
+    {
+        deck.DrawCard(drawamount);
+    }
 }

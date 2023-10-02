@@ -12,7 +12,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Arena          arena;
     [SerializeField] private CardDisplay    cardDisplay;
 
-    public event Action onCardIsPlayedFromHand;
+   // public event Action onCardIsPlayedFromHand;
 
     public GameObject currentTile;
     public Image artwork;
@@ -111,6 +111,16 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
         if (temp.GetComponent<Norse_Priest>()!= null&& this.card.cardID== 6)
         {
             temp.GetComponent<Norse_Priest>().IncreaseDevoutSTR();
+        }
+
+    }
+    public void TrytogettheHUNINscriptanduseit()
+    {
+        GameObject temp = gameObject;
+
+        if (temp.GetComponent<Norse_Hunin>() != null && this.card.cardID == 3)
+        {
+            temp.GetComponent<Norse_Hunin>().HuninDraw();
         }
 
     }

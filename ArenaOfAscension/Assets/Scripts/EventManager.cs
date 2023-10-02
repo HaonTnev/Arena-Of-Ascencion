@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public static event Action onCardIsPlayedFromHand;
+   public static event Action onCardIsPlayedFromHand;
 
     
 }
