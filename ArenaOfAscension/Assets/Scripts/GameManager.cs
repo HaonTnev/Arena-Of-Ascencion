@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject startWindow;
     [SerializeField] private GameObject winWindow;
     [SerializeField] private GameObject loseWindow;
+    private Ability ability;
     delegate void TestDelegate();
     TestDelegate turnSwitch;
 
@@ -43,8 +44,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ability = new Ability();
+        ability.CreateList();
         enemyBehaviour = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehaviour>();
-        deck = GameObject.Find("Deck").GetComponent<Deck>(); ;
+        deck = GameObject.Find("Deck").GetComponent<Deck>(); 
         turnSwitch = enemyTurn;
         GameStarts();
         //deck.DrawCard(3);

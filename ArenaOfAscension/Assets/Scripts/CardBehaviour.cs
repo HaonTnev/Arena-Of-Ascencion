@@ -11,14 +11,16 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     public                   Card           card;
     [SerializeField] private Arena          arena;
     [SerializeField] private CardDisplay    cardDisplay;
+    [SerializeField] private Ability ability;
 
-   // public event Action onCardIsPlayedFromHand;
+    // public event Action onCardIsPlayedFromHand;
 
     public GameObject currentTile;
     public Image artwork;
 
     public bool isHovered = false;
     public bool wasUsedThisTurn = false;
+    
 
     //Set refrences to GameObjects and scripts that cannot be set in the inspector
     private void Awake()
@@ -33,6 +35,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
+        ability = new Ability(); 
         //EventManager.onCardIsPlayedFromHand += 
     }
 
@@ -93,8 +96,17 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
         GetTilePosition(currentTile);
         artwork.transform.localPosition = new Vector3(0,0,0);
 
+        if(cardDisplay.cardID == 3)
+        {
 
-        Trytogetthepriestscriptanduseit();
+            Debug.Log("Played");
+            ability.abilityObject.IndexOf(ability.HuninAbility);
+        }
+        
+
+        
+        
+        Trytogetthepriestscriptanduseit(); 
 
     }
 
