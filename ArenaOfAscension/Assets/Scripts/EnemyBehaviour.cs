@@ -81,17 +81,17 @@ public class EnemyBehaviour : MonoBehaviour
                 currentTile.GetComponent<ArenaTile>().GetNeighboringTiles(GetTilePosition(currentTile));
         int randomIndex = Random.Range(0, neighbours.Count);
         GameObject toMoveTo = neighbours[randomIndex];
-        Debug.Log("Troll wants to move to: " + toMoveTo.name);
+      //  Debug.Log("Troll wants to move to: " + toMoveTo.name);
         if (toMoveTo.GetComponent<ArenaTile>().occupiedByFoe == false&& toMoveTo.GetComponent<ArenaTile>().occupiedByFriend == false)
         {
             gameObject.transform.SetParent(toMoveTo.transform, false);
             toMoveTo.GetComponent<ArenaTile>().occupiedByFoe = true;
             cameFrom.GetComponent<ArenaTile>().occupiedByFoe = false;
-            Debug.Log(toMoveTo.name + " was not occupied. Troll moved to" + toMoveTo.name);
+          //  Debug.Log(toMoveTo.name + " was not occupied. Troll moved to" + toMoveTo.name);
         }
         else
         {
-            Debug.Log(toMoveTo.name + " was occupied.");
+          //  Debug.Log(toMoveTo.name + " was occupied.");
             EnenmyDoDamage(toMoveTo);
 
             if (toMoveTo.GetComponent<ArenaTile>().occupiedByFriend==false)
@@ -137,10 +137,15 @@ public class EnemyBehaviour : MonoBehaviour
         toKill.GetComponent<CardDisplay>().card.cardState = Card.CardState.inDeadPile;
         gameManager.currentPlayerHealth = gameManager.currentPlayerHealth - toKill.GetComponent<CardDisplay>().card.cardSTR;
 
-        // Same reasoning as is CardBehaviour ln 101-105.
-        if (toKill.GetComponent<CardDisplay>().cardID == 6)
+        switch (toKill.GetComponent<CardDisplay>().card.cardID)
         {
-            ability.PriestDeathAbility();
+            case 0: break;
+            case 1: break;
+            case 2: break;
+            case 3: break;
+            case 4: break;
+            case 5: break;
+            case 6: ability.PriestDeathAbility(); break;
         }
         
     }
