@@ -96,44 +96,22 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
         GetTilePosition(currentTile);
         artwork.transform.localPosition = new Vector3(0,0,0);
 
-        if(cardDisplay.cardID == 3)
+        
+        switch (cardDisplay.cardID)
         {
-            ability.HuninAbility();
-        }
-        
+            case 0: break;
+            case 1: break;
+            case 2: break;
 
-        
-        
-        Trytogetthepriestscriptanduseit(); 
-
-    }
-
-    // A very unelegant way to recieve card specific functionalitiy.
-    // Cause in theory we would have to check each Card ID every time we play a card.
-    // For now we can implement like this, in order to continue towards the playable prototype.
-    // But I cant help but think that we should store an array of all the "battlecries" and just get the one at the ID of the card. 
-    // But how and where? 
-
-    public void Trytogetthepriestscriptanduseit()
-    {
-        GameObject temp = gameObject;
-        
-        if (temp.GetComponent<Norse_Priest>()!= null&& this.card.cardID== 6)
-        {
-            temp.GetComponent<Norse_Priest>().IncreaseDevoutSTR();
+            case 3: ability.HuninAbility(); break;
+            case 4: break;
+            case 5: break;
+            case 6: ability.PriestPlayAbility(); break;
         }
 
     }
-    public void TrytogettheHUNINscriptanduseit()
-    {
-        GameObject temp = gameObject;
 
-        if (temp.GetComponent<Norse_Hunin>() != null && this.card.cardID == 3)
-        {
-            temp.GetComponent<Norse_Hunin>().HuninDraw();
-        }
-
-    }
+  
 
     //Get position of the card in the arena by feeding in parent tile go.
     public Vector2Int GetTilePosition(GameObject go)

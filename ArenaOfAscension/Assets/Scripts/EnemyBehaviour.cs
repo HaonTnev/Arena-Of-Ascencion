@@ -14,11 +14,13 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] GameObject info;
     public GameObject currentTile;
     public int currentHealth;
+    private Ability ability;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        ability = new Ability();
         gameManager = GameObject.Find("Canvas").GetComponent<GameManager>(); 
         deadPile = GameObject.Find("DeadPile");
         enemyDisplay = gameObject.GetComponent<EnemyDisplay>();
@@ -138,7 +140,7 @@ public class EnemyBehaviour : MonoBehaviour
         // Same reasoning as is CardBehaviour ln 101-105.
         if (toKill.GetComponent<CardDisplay>().cardID == 6)
         {
-            toKill.GetComponent<Norse_Priest>().DecreaseDevoutSTR();
+            ability.PriestDeathAbility();
         }
         
     }

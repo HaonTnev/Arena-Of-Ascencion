@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ability = new Ability();
-        ability.CreateList();
         enemyBehaviour = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehaviour>();
         deck = GameObject.Find("Deck").GetComponent<Deck>(); 
         turnSwitch = enemyTurn;
