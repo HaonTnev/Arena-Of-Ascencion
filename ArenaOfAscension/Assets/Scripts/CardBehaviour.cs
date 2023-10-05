@@ -98,9 +98,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
         if(cardDisplay.cardID == 3)
         {
-
-            Debug.Log("Played");
-            ability.abilityObject.IndexOf(ability.HuninAbility);
+            ability.HuninAbility();
         }
         
 
