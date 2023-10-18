@@ -52,6 +52,10 @@ public class Deck : MonoBehaviour
 
     }
 
+    public void AddCardToDeck()
+    {
+
+    }
 
     public GameObject GetCardToDraw()
     {
@@ -102,13 +106,6 @@ public class Deck : MonoBehaviour
     {
         return decklist;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Shuffle<T>(List<T> listToShuffle)
     {
        // Debug.Log("before shuffle:" + string.Join(",", Decklist));
