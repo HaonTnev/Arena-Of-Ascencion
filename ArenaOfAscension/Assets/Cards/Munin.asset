@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Munin
   m_EditorClassIdentifier: 
   cardState: 0
+  cardCategory: 1
   selection: 1
   cardID: 4
   cardCost: 2

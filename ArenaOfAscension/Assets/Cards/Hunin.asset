@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Hunin
   m_EditorClassIdentifier: 
   cardState: 0
+  cardCategory: 3
+  selection: 1
   cardID: 3
   cardCost: 2
   cardSTR: 0
@@ -21,4 +23,6 @@ MonoBehaviour:
   Cardback: {fileID: 0}
   cardName: Hunin
   cardTraits: Divine
+  Human: 0
+  Devout: 0
   cardDescription: 'When played: Draw 1 card'

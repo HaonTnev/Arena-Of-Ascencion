@@ -90,7 +90,7 @@ public class CardDisplay : MonoBehaviour
         cardArtwork.sprite = card.Artwork;
 
     }
-
+    
 
     // Tbh I have no Idea what this does anymore :,)
     public void CheckCardState()

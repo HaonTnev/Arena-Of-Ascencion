@@ -10,7 +10,9 @@ public class Card : ScriptableObject
     //The States cards can be in to be checked in diffren scripts.
     //Probably best to implement heplerfunctions that return current state instead of GetComponent<Card> all the time.  
     public CardState cardState;
+    public CardCategory cardCategory; 
     public Selection selection = Selection.notSelected;
+ 
     public enum CardState
     {
         inDeck,
@@ -23,6 +25,14 @@ public class Card : ScriptableObject
     {
         selected, 
         notSelected
+    }
+
+    public enum CardCategory
+    {
+        Spell,
+        Item, 
+        Rune,
+        Unit
     }
     // data associated with each card
     public int cardID;

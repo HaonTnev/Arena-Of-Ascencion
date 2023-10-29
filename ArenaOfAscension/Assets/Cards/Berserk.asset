@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Berserk
   m_EditorClassIdentifier: 
   cardState: 1
+  cardCategory: 3
   selection: 1
   cardID: 1
   cardCost: 1

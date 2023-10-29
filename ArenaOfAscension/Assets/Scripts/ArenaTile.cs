@@ -20,6 +20,8 @@ public class ArenaTile : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
     public bool occupiedByFriend = false; 
     public bool occupiedByFoe = false;
 
+   
+
     private void Start()
     {
         image = GetComponent<Image>();

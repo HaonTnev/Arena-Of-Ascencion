@@ -9,7 +9,7 @@ public class Deck : MonoBehaviour
 
 
     //Get references to the card prefabs.
-    public GameObject pesant, berserk, shieldmaid, hunin, valkyrie, priest;
+    public GameObject pesant, berserk, shieldmaid, hunin, valkyrie, priest, item;
 
     //Create Decklist 
     public List<GameObject> startingDecklist    = new List<GameObject>();
@@ -30,6 +30,7 @@ public class Deck : MonoBehaviour
         startingDecklist.Add(hunin);
         startingDecklist.Add(valkyrie);
         startingDecklist.Add(priest);
+        startingDecklist.Add(item);
         // Debug.Log("before shuffle:" + string.Join(",", Decklist));
         Shuffle(startingDecklist);
        // Debug.Log("after shuffle:" + string.Join(",", Decklist));

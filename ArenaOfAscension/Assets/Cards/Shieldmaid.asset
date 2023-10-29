@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Shieldmaid
   m_EditorClassIdentifier: 
   cardState: 0
+  cardCategory: 3
+  selection: 1
   cardID: 2
   cardCost: 1
   cardSTR: 2
@@ -21,4 +23,6 @@ MonoBehaviour:
   Cardback: {fileID: 0}
   cardName: Shieldmaid
   cardTraits: Human, Warrior
+  Human: 0
+  Devout: 0
   cardDescription: Versatile

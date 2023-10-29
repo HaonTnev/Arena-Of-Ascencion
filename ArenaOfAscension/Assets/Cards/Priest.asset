@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Priest
   m_EditorClassIdentifier: 
   cardState: 0
+  cardCategory: 3
   selection: 0
   cardID: 6
   cardCost: 3

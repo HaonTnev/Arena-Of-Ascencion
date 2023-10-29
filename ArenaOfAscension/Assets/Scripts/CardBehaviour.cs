@@ -12,6 +12,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Arena          arena;
     [SerializeField] private CardDisplay    cardDisplay;
     [SerializeField] private Ability ability;
+    private ArenaTile arenaTile; 
 
     // public event Action onCardIsPlayedFromHand;
 
@@ -20,7 +21,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
     public bool isHovered = false;
     public bool wasUsedThisTurn = false;
-    
+
 
     //Set refrences to GameObjects and scripts that cannot be set in the inspector
     private void Awake()
@@ -35,7 +36,7 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
-        ability = new Ability(); 
+        ability = new Ability();
         //EventManager.onCardIsPlayedFromHand += 
     }
 
@@ -84,19 +85,41 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     //To be optimized
     public void OnPlay()
     {
-
+        
         gameManager.PayMana(card.cardCost);
-        currentTile = transform.parent.gameObject;
       
-            currentTile.GetComponent<ArenaTile>().occupiedByFriend = true;
-            currentTile.GetComponent<BoxCollider2D>().enabled = false;
-        
 
-        card.cardState = Card.CardState.inArena;
-        GetTilePosition(currentTile);
-        artwork.transform.localPosition = new Vector3(0,0,0);
+        switch (card.cardCategory)
+        {
+            case Card.CardCategory.Spell: break;
+            case Card.CardCategory.Item:
+                currentTile = transform.parent.gameObject;
+                if(currentTile.GetComponent<ArenaTile>().occupiedByFriend == true)
+                {
+                    currentTile.GetComponent<BoxCollider2D>().enabled = false;
+                    
+                    Debug.Log("yeah");
+                }
+                
+                
 
-        
+
+                
+                    
+                
+                break;
+            case Card.CardCategory.Rune: break;
+            case Card.CardCategory.Unit:
+                currentTile = transform.parent.gameObject;
+                currentTile.GetComponent<ArenaTile>().occupiedByFriend = true;
+                currentTile.GetComponent<BoxCollider2D>().enabled = false;
+
+
+                card.cardState = Card.CardState.inArena;
+                GetTilePosition(currentTile);
+                artwork.transform.localPosition = new Vector3(0, 0, 0); break; 
+        }
+
         switch (cardDisplay.cardID)
         {
             case 0: break;
@@ -110,7 +133,6 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
 
     }
 
-  
 
     //Get position of the card in the arena by feeding in parent tile go.
     public Vector2Int GetTilePosition(GameObject go)
@@ -123,12 +145,13 @@ public class CardBehaviour : MonoBehaviour, IPointerDownHandler
     //Show if neighbours are eligable or not
     public void HighlightNeighbors()
     {  
+       
         List<GameObject> neighbors = transform.parent.gameObject.GetComponent<ArenaTile>().GetNeighboringTiles(GetTilePosition(currentTile));
        
         foreach (GameObject neighbor in neighbors)
         {
            Image imageToHighligt =  neighbor.GetComponent<Image>();
-            if (neighbor.GetComponent<ArenaTile>().occupiedByFriend== false)
+            if (neighbor.GetComponent<ArenaTile>().occupiedByFriend == false)
             {
                 imageToHighligt.color = Color.green;
             }

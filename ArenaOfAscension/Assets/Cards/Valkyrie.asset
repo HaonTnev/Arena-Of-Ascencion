@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Valkyrie
   m_EditorClassIdentifier: 
   cardState: 0
+  cardCategory: 3
+  selection: 1
   cardID: 5
   cardCost: 2
   cardSTR: 1
@@ -21,4 +23,6 @@ MonoBehaviour:
   Cardback: {fileID: 0}
   cardName: Valkyrie
   cardTraits: Divine, Warrior
+  Human: 0
+  Devout: 0
   cardDescription: Defends the fallen on their way.
